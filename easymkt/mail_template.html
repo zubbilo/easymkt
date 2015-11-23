@@ -1,0 +1,72 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ </head>
+ <body>
+
+    <span style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 16px; color: #333333; background-color: #ffffff;">
+    <div style="width: 750px">
+        <blockquote style="padding: 0 0 0 15px; margin: 0 0 20px; border-left: 5px solid #eeeeee;">
+            <span style="margin-bottom: 0; font-size: 16px;font-weight: 300;line-height: 25px;">
+            	<p style="margin: 0 0 10px; font-size: 16px; background-color: #5CACEE; color: white; padding: 4px;">Greeting All!<br>Easy-MKT {{func}} {{date}}</p>
+            </span>
+        <table style="width:100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px;">
+          <thead style="border-bottom: 2px solid rgb(190, 190, 190); vertical-align: bottom;">
+           <tr>
+                <span style="font-weight: bold; color: #00C5CD;">
+                <th width="33%">Total</th>
+                <th width="33%">Fail</th>
+                <th width="33%">Success</th>
+                </span>
+           </tr>
+          </thead>
+          <tbody>
+           <tr>
+                <td style="background-color: #d9edf7; text-align: center;">{{summary.total}}</td>
+                <td style="background-color: #f2dede; text-align: center;">{{summary.fail}}</td>
+                <td style="background-color: #dff0d8; text-align: center;">{{summary.success}}</td>
+           </tr>
+          </tbody>
+        </table>
+
+        <table style="width:100%; background-color: transparent; border-collapse: collapse; border-spacing: 0; margin-bottom: 20px;">
+          <thead style="border-bottom: 2px solid #eeeeee; vertical-align: bottom;">
+           	<tr>
+                    <span style="font-weight: bold; color: #00C5CD;">
+			<th align="left">#</th>
+                	<th align="left">Identity</th>
+                	<th align="left">Location</th>
+                	<th align="left">Status</th>
+                        {% if debug == "True" %}
+                                <th align="left" width="30%">Error</th>
+                        {% endif %}
+                    </span>
+           	</tr>
+          </thead>
+          <tbody style="font-size: 12px;">
+          	{%for mikrotik in mikrotiks%}
+          		{% if mikrotik.class == 0 %}
+           		<tr style="background-color: #FF6A6A; border-bottom: 2px dotted black;">
+			{% elif mikrotik.class == 1%}
+			<tr style="background-color: #E0EEE0; border-bottom: 2px dotted black;">
+			{% elif mikrotik.class == 2%}
+			<tr style="background-color: #4EEE94; border-bottom: 2px dotted black;">
+          		{% else %}
+           		<tr style="border-bottom: 2px dotted black;">
+          		{% endif %}
+                	    <td>Addr:<br>Name:<br>URL:</td>
+                	    <td>{{mikrotik.addr}}<br>{{mikrotik.name}}<br>{{mikrotik.file}}</td>
+                	    <td>{{mikrotik.location}}</td>
+                	    <td>{{mikrotik.status}}</td>
+                    	    {% if debug == "True" %}
+                        	<td>{{mikrotik.error}}</td>
+                    	    {% endif %}
+           		</tr>
+          	{%endfor%}
+          </tbody>
+        </table>
+        </blockquote>
+    </div>
+    </span>
+ </body>
+</html>
